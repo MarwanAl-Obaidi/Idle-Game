@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './game.css';
+import NavBar from '../../components/NavBar/NavBar';
 
 const Game = () => {
   const [coins, setCoins] = useState(0); // Total coins
@@ -29,17 +30,20 @@ const Game = () => {
   };
 
   return (
-    <div className="gameContainer">
-      <h1>Idle Coin Game</h1>
-      <p>Coins: {coins}</p>
-      <p>Coins per Second: {coinsPerSecond}</p>
-      <button onClick={collectCoins} className="gameButton">
-        Collect 1 Coin
-      </button>
-      <br />
-      <button onClick={buyUpgrade} disabled={coins < upgradeCost} className="gameButton">
-        Upgrade (Cost: {upgradeCost} Coins)
-      </button>
+    <div>
+      <NavBar />
+      <div className="gameContainer">
+        <h1>Idle Coin Game</h1>
+        <p>Coins: {coins}</p>
+        <p>Coins per Second: {coinsPerSecond}</p>
+        <button onClick={collectCoins} className="gameButton">
+          Collect 1 Coin
+        </button>
+        <br />
+        <button onClick={buyUpgrade} disabled={coins < upgradeCost} className="gameButton">
+          Upgrade (Cost: {upgradeCost} Coins)
+        </button>
+      </div>
     </div>
   );
 };
