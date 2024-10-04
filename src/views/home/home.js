@@ -13,6 +13,7 @@ const Home = () => {
             <div className="homeContainer">
                 <h1>Welcome to the Idle Coin Game!</h1>
                 <p>Start collecting coins and upgrading your earnings.</p>
+                <p>The game is currently in alpha</p>
                 {currentUser ? (
                     <Link to="/game">
                         <button className="homeButton">Start Game</button>

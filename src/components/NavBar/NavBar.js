@@ -22,6 +22,11 @@ const NavBar = () => {
                         Home
                     </NavLink>
                 </li>
+                <li className="navItem">
+                    <NavLink to="/leaderboards" className={({ isActive }) => (isActive ? "activeNavLink" : "navLink")}>
+                        Leaderboards
+                    </NavLink>
+                </li>
                 {currentUser && (
                     <li className="navItem">
                         <NavLink to="/game" className={({ isActive }) => (isActive ? "activeNavLink" : "navLink")}>

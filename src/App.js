@@ -8,6 +8,7 @@ import Home from './views/home/home.js';
 import Game from './views/game/game.js';
 import Login from './views/logIn/logIn.js';
 import SignUp from './views/signUp/signUp.js';
+import Leaderboards from './views/leaderboards/leaderboards.js';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path="/game" element={<PrivateRoute><Game /></PrivateRoute>} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
+          <Route path="/leaderboards" element={<Leaderboards />} />
         </Routes>
       </Router>
     </AuthProvider>
