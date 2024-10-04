@@ -2,12 +2,15 @@ import React, { useState } from 'react';
 import NavBar from '../../components/NavBar/NavBar.js';
 import { useAuth } from '../../components/authContext/authContext.js';
 import { useNavigate } from 'react-router-dom';
+import { db } from '../../firebase';
+import { setDoc, doc } from 'firebase/firestore';
 import './signUp.css';
 
 export default function SignUp() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
+    const [username, setUsername] = useState('');
     const { signup } = useAuth();
     const navigate = useNavigate();
 
@@ -19,10 +22,25 @@ export default function SignUp() {
         }
 
         try {
-            await signup(email, password);
+            // Attempt to sign up the user
+            const userCredential = await signup(email, password);
+            const user = userCredential.user;
+
+            // Prepare user data for Firestore
+            const userData = {
+                uid: user.uid,
+                email: user.email,
+                username: username,
+            };
+
+            // Attempt to store the data in Firestore
+            await setDoc(doc(db, 'users', user.uid), userData);
+
             alert("Signed up successfully!");
             navigate("/game");
         } catch (error) {
+            // Handle errors from signup and Firestore
+            console.error("Error during signup or Firestore operation:", error.message);
             alert("Failed to sign up: " + error.message);
         }
     }
@@ -32,6 +50,14 @@ export default function SignUp() {
             <NavBar />
             <div className="signup-container">
                 <form className="signup-form" onSubmit={handleSubmit}>
+                    <input
+                        type="text"
+                        className="signup-input"
+                        value={username}
+                        onChange={(e) => setUsername(e.target.value)}
+                        placeholder="Username"
+                        required
+                    />
                     <input
                         type="email"
                         className="signup-input"
