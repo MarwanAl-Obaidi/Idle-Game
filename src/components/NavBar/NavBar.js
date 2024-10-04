@@ -1,41 +1,24 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
+import './NavBar.css';
 
 const NavBar = () => {
     return (
-        <nav style={styles.navbar}>
-            <ul style={styles.navList}>
-                <li style={styles.navItem}>
-                    <Link to="/" style={styles.navLink}>Home</Link>
+        <nav className="navbar">
+            <ul className="navList">
+                <li className="navItem">
+                    <NavLink to="/" className={({ isActive }) => (isActive ? "activeNavLink" : "navLink")}>
+                        Home
+                    </NavLink>
                 </li>
-                <li style={styles.navItem}>
-                    <Link to="/game" style={styles.navLink}>Game</Link>
+                <li className="navItem">
+                    <NavLink to="/game" className={({ isActive }) => (isActive ? "activeNavLink" : "navLink")}>
+                        Game
+                    </NavLink>
                 </li>
             </ul>
         </nav>
     );
-};
-
-const styles = {
-    navbar: {
-        backgroundColor: '#282c34',
-        padding: '10px 20px',
-        display: 'flex',
-        justifyContent: 'space-around',
-    },
-    navList: {
-        listStyle: 'none',
-        display: 'flex',
-        margin: 0,
-        padding: 0,
-    },
-    navItem: {
-        margin: '0 10px',
-    },
-    navLink: {
-        color: 'white',
-        textDecoration: 'none',
-    },
 };
 
 export default NavBar;
